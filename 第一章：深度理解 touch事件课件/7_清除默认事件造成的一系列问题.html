@@ -1,65 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,user-scalable=no" />
-<title>Document</title>
-<style type="text/css">
-	input {
-		width: 90%;
-		height: 50px;
-	}
-</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<title>Document</title>
+	<style type="text/css">
+		input {
+			width: 90%;
+			height: 50px;
+		}
+	</style>
 </head>
+
 <body>
-<div class="page">
-<img src="img/img.jpg" />
-<input type="text" name="">
-<ul class="list">
-	<!-- <li></li> -->
-</ul>
-</div>	
-<script type="text/javascript">
-var inner = "";
-var list = document.querySelector('.list');
-var input = document.querySelector('input');
-for(var i = 0; i < 50; i++){
-	inner += "<li>这是第"+i+"个li</li>";
-}	
-list.innerHTML = inner;
-/*
-阻止默认事件带来的问题：
-	解决IOS10+ safari 以及部分安卓浏览器 不在支持 viewport的最大缩放值和禁止缩放的问题
+	<div class="page">
+		<img src="img/img.jpg" />
+		<input type="text" name="">
+		<ul class="list">
+			<!-- <li></li> -->
+		</ul>
+	</div>
+	<script type="text/javascript">
+		var inner = "";
+		var list = document.querySelector('.list');
+		var input = document.querySelector('input');
+		for (var i = 0; i < 50; i++) {
+			inner += "<li>这是第" + i + "个li</li>";
+		}
+		list.innerHTML = inner;
+		/*
+		阻止默认事件带来的问题：
+			解决 IOS10+、safari 以及部分安卓浏览器不在支持 viewport 的最大缩放值和禁止缩放的问题( 设置 user-scalable=no 无效)
 
-	解决IOS10+ safari下给body加overflow：hidden无效的问题
-		给元素加了 一个绝对定位，但是元素本身没有定位父级，元素如果超出了body的宽度，body 上的overflow对这个元素，不起效果
-		解决办法：
-			给body加上一个相对定位
+			解决 IOS10+、safari 下给 body 加 overflow:hidden; 无效的问题
+				情况：给元素加了一个绝对定位，但是元素本身没有定位父级(元素是根据 document 来进行定位)，元素如果超出了 body 的宽度，body 上的 overflow 对这个元素不起效果
+				解决办法：
+					给 body 加上一个相对定位(会引起 iOS 下的其他问题，建议给页面整体加个布局容器)
 
-	解决事件点透的问题
+			解决事件点透的问题
 
-	禁止mouse事件执行
+			禁止 mouse 事件执行
 
-	阻止浏览器的回弹效果
+			阻止浏览器的回弹效果
 
-	阻止触发浏览器的滚动条
+			阻止触发浏览器的滚动条
 
-	阻止触发系统菜单
+			阻止触发系统菜单( 长按图片，会触发系统菜单 )
 
-	阻止图片文字被选中
+			阻止图片文字被选中( 长按文字也会有系统菜单，有一些选中、复制的操作 )
 
-	阻止input的输入	
-*/
-var page = document.querySelector('.page');
-// page.addEventListener('touchstart', function(e) {
-// 	e.preventDefault();
-// });
-input.addEventListener('touchstart', function(e) {
-	e.preventDefault();
-});
-// list.addEventListener('click', function(e) {
-// 	alert(1);
-// });
-</script>
+			阻止 input 的输入( 不会弹出软键盘 )
+		*/
+		var page = document.querySelector('.page');
+		page.addEventListener('touchstart', function (e) {
+			e.preventDefault();
+		});
+		list.addEventListener('click', function (e) {
+			// 此时 click 不在执行，会阻止 mouse 事件的执行
+			alert(1);
+		});
+		// input.addEventListener('touchstart', function (e) {
+		// 	e.preventDefault();
+		// });
+	</script>
 </body>
+
 </html>

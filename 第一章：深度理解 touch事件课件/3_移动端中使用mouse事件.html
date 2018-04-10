@@ -16,16 +16,18 @@
 <div id="box"></div>
 <script type="text/javascript">
 /*
-	移动端同样也支持 mouse事件
-	但是mouse事件 在移动端的执行会有300ms左右的一个延迟
+	移动端同样也支持 mouse 事件
+	但是 mouse 事件 在移动端的执行会有 300ms 左右的一个延迟
+
+	所以先执行了 touchstart，在执行了 mousedown
 */
 (function(){
 	var box = document.querySelector('#box');
 	box.addEventListener('mousedown', function(e) {
-		console.log(1);
+		console.log('mousedown');
 	});
 	box.addEventListener('touchstart', function(e) {
-		console.log(2);
+		console.log('touchstart');
 	});
 })();
 </script>

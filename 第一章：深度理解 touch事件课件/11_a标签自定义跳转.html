@@ -23,6 +23,7 @@ var inner = "";
 var list = document.querySelector('.list');
 var input = document.querySelector('input');
 for(var i = 0; i < 50; i++){
+	// 阻止默认事件后，<a> 跳转也没用了
 	inner += '<li><a href="http://www.miaov.com">这是第'+i+"个li</li>";
 }	
 list.innerHTML = inner;
@@ -33,12 +34,13 @@ page.addEventListener('touchstart', function(e) {
 	e.preventDefault();
 });
 
+// 自定义点击跳转
 var a = list.querySelectorAll('a');
 for(var i = 0; i < a.length; i++){
 	a[i].addEventListener('touchend', function(e) {
-		//console.log(this.href);
+		// console.log(this.href);
 		window.location.href = this.href;
-		/* touch误触 滑屏误触 */
+		/* touchend 会导致误触。现象滑屏操作的时候，会误触 */
 	});
 }
 </script>

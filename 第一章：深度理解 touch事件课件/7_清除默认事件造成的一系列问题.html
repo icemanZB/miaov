@@ -60,6 +60,7 @@
 			// 此时 click 不在执行，会阻止 mouse 事件的执行
 			alert(1);
 		});
+		// 不建议给某个元素单独加阻止默认事件，这会导致比较差的用户体验
 		// input.addEventListener('touchstart', function (e) {
 		// 	e.preventDefault();
 		// });

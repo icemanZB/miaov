@@ -41,6 +41,7 @@ for(var i = 0; i < a.length; i++){
 */
 /*
 	在手指抬起时判断元素有没有发生move事件，如果没有发生move事件我们就认定用户要操作的是一个tap操作
+	但是会引发另外一个问题：在安卓下，手指触摸元素，容易触发元素的 touchmove 事件(手指接触屏幕面积较大引起的)
 */
 function tap(el,fn){
 	var isMove = false;
@@ -49,7 +50,7 @@ function tap(el,fn){
 	});
 	el.addEventListener('touchend', function(e) {
 		if(!isMove){
-			fn&&fn.call(el,e); //判断fn存在 就是执行
+			fn&&fn.call(el,e); // 判断fn存在 就是执行
 		}
 		isMove = false;
 	});

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<meta name="viewport" content="width=device-width,user-scalable=no"/>
 	<title>Document</title>
 	<style>
 		#box {
@@ -15,31 +14,30 @@
 </head>
 
 <body>
-	<div id="box"></div>
-	<script type="text/javascript">
-		(function () {
-			var box = document.querySelector('#box');
-			/*
-				touchstart 手指触碰
-				touchmove 手指移动(手指移出红色方块也会继续触发)
-				touchend 手指抬起(手指移出红色方块也会继续触发)
+<div id="box"></div>
+<script type="text/javascript">
+	(function () {
+		var box = document.querySelector('#box');
+		/*
+		 touchstart 手指触碰
+		 touchmove 手指移动(手指移出红色方块也会继续触发)
+		 touchend 手指抬起(手指移出红色方块也会继续触发)
 
-				在 chrome 模拟器下 不支持用 on 的方式来给元素加 touch 事件，在真机没有问题
-			*/
-			box.ontouchstart = function () {
-				console.log('touchstart');
-			};
-			box.addEventListener('touchstart', function (e) {
-				console.log('touchstart');
-			});
-			box.addEventListener('touchmove', function (e) {
-				console.log('touchmove');
-			});
-			box.addEventListener('touchend', function (e) {
-				console.log('touchend');
-			});
-		})();
-	</script>
+		 在 chrome 模拟器下 不支持用 on 的方式来给元素加 touch 事件，在真机没有问题
+		 */
+		box.ontouchstart = function () {
+			console.log('touchstart');
+		};
+		box.addEventListener('touchstart', function (e) {
+			console.log('touchstart');
+		});
+		box.addEventListener('touchmove', function (e) {
+			console.log('touchmove');
+		});
+		box.addEventListener('touchend', function (e) {
+			console.log('touchend');
+		});
+	})();
+</script>
 </body>
-
 </html>

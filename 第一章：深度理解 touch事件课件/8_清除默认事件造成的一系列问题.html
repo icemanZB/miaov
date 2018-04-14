@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<meta name="viewport" content="width=device-width,user-scalable=no"/>
 	<title>Document</title>
 	<style type="text/css">
 		input {
@@ -14,30 +13,29 @@
 </head>
 
 <body>
-	<div class="page">
-		<img src="img/img.jpg" />
-		<input type="text" name="">
-		<ul class="list">
-			<!-- <li></li> -->
-		</ul>
-	</div>
-	<script type="text/javascript">
-		var inner = "";
-		var list = document.querySelector('.list');
-		var input = document.querySelector('input');
-		for (var i = 0; i < 50; i++) {
-			inner += "<li>这是第" + i + "个li</li>";
-		}
-		list.innerHTML = inner;
+<div class="page">
+	<img src="img/img.jpg"/>
+	<input type="text" name="">
+	<ul class="list">
+		<!-- <li></li> -->
+	</ul>
+</div>
+<script type="text/javascript">
+	var inner = "";
+	var list = document.querySelector('.list');
+	var input = document.querySelector('input');
+	for (var i = 0; i < 50; i++) {
+		inner += "<li>这是第" + i + "个li</li>";
+	}
+	list.innerHTML = inner;
 
-		var page = document.querySelector('.page');
+	var page = document.querySelector('.page');
 
-		input.addEventListener('touchstart', function (e) {
-			e.preventDefault();
-			// 阻止冒泡作用也不大
-			e.stopPropagation();
-		});
-	</script>
+	input.addEventListener('touchstart', function (e) {
+		e.preventDefault();
+		// 阻止冒泡作用也不大
+		e.stopPropagation();
+	});
+</script>
 </body>
-
 </html>

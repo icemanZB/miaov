@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<meta name="viewport" content="width=device-width,user-scalable=no"/>
 	<title>Document</title>
 	<style type="text/css">
 		input {
@@ -14,30 +13,29 @@
 </head>
 
 <body>
-	<div class="page">
-		<img src="img/img.jpg" />
-		<input type="text" name="">
-		<ul class="list">
-		</ul>
-	</div>
-	<script type="text/javascript">
-		var inner = "";
-		var list = document.querySelector('.list');
-		var input = document.querySelector('input');
-		for (var i = 0; i < 50; i++) {
-			inner += "<li>这是第" + i + "个li</li>";
-		}
-		list.innerHTML = inner;
-		var page = document.querySelector('.page');
-		page.addEventListener('touchstart', function (e) {
-			e.preventDefault();
-		});
-		// input 获取焦点，在部分系统不能弹出输入框
-		// input.addEventListener('touchstart', function(e) {
-		// 	this.focus();
-		// });
-		/* 最好的解决办法，不要在阻止默认事件的页面进行 input 框输入，最好跳转到一个新页面去，然后让用在新的页面进行输入，参考淘宝移动端 */
-	</script>
+<div class="page">
+	<img src="img/img.jpg"/>
+	<input type="text" name="">
+	<ul class="list">
+	</ul>
+</div>
+<script type="text/javascript">
+	var inner = "";
+	var list = document.querySelector('.list');
+	var input = document.querySelector('input');
+	for (var i = 0; i < 50; i++) {
+		inner += "<li>这是第" + i + "个li</li>";
+	}
+	list.innerHTML = inner;
+	var page = document.querySelector('.page');
+	page.addEventListener('touchstart', function (e) {
+		e.preventDefault();
+	});
+	// input 获取焦点，在部分系统不能弹出输入框
+	// input.addEventListener('touchstart', function(e) {
+	// 	this.focus();
+	// });
+	/* 最好的解决办法，不要在阻止默认事件的页面进行 input 框输入，最好跳转到一个新页面去，然后让用在新的页面进行输入，参考淘宝移动端 */
+</script>
 </body>
-
 </html>

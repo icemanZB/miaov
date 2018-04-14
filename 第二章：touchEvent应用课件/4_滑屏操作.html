@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<meta name="viewport" content="width=device-width,user-scalable=no"/>
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<style type="text/css">
@@ -67,52 +66,51 @@
 </head>
 
 <body>
-	<div class="page">
-		<header>妙味滑屏</header>
-		<div class="wrap">
-			<ul class="list"></ul>
-		</div>
+<div class="page">
+	<header>妙味滑屏</header>
+	<div class="wrap">
+		<ul class="list"></ul>
 	</div>
-	<script type="text/javascript">
-		/* 页面结构 */
-		(function () {
-			var list = document.querySelector('.list');
-			var inner = "";
-			for (var i = 0; i < 100; i++) {
-				inner += "<li>这是第" + i + "个li</li>"
-			}
-			list.innerHTML = inner;
-		})();
-		/* 滑屏操作 */
-		/*
-			1. 按下时 获取 元素坐标 和 手指坐标
-			2. move时 获取手指坐标
-			3. 用 move 的手指 - start 时的手指坐标 = 手指移动距离
-			4. start 时元素坐标 +  手指移动距离 = 元素的当前距离
-		*/
-		(function () {
-			var wrap = document.querySelector('.wrap');
-			var scroll = wrap.querySelector('ul');
-			var startPoint = 0; //按下时的手指坐标
-			var startEl = 0; //按下时的元素坐标
-			wrap.addEventListener('touchstart', function (e) {
-				startPoint = e.changedTouches[0].pageY;
-				startEl = css(scroll, "top");
-			});
-			wrap.addEventListener('touchmove', function (e) {
-				var nowPoint = e.changedTouches[0].pageY;
-				var pointDis = nowPoint - startPoint;
-				console.log(pointDis + startEl);
-			});
-		})();
-
-		// 获取或者设置元素的样式
-		function css(el, attr) {
-			var val = getComputedStyle(el)[attr];
-			val = parseFloat(val);
-			return val;
+</div>
+<script type="text/javascript">
+	/* 页面结构 */
+	(function () {
+		var list = document.querySelector('.list');
+		var inner = "";
+		for (var i = 0; i < 100; i++) {
+			inner += "<li>这是第" + i + "个li</li>"
 		}
-	</script>
-</body>
+		list.innerHTML = inner;
+	})();
+	/* 滑屏操作 */
+	/*
+	 1. 按下时 获取 元素坐标 和 手指坐标
+	 2. move时 获取手指坐标
+	 3. 用 move 的手指 - start 时的手指坐标 = 手指移动距离
+	 4. start 时元素坐标 +  手指移动距离 = 元素的当前距离
+	 */
+	(function () {
+		var wrap = document.querySelector('.wrap');
+		var scroll = wrap.querySelector('ul');
+		var startPoint = 0; //按下时的手指坐标
+		var startEl = 0; //按下时的元素坐标
+		wrap.addEventListener('touchstart', function (e) {
+			startPoint = e.changedTouches[0].pageY;
+			startEl = css(scroll, "top");
+		});
+		wrap.addEventListener('touchmove', function (e) {
+			var nowPoint = e.changedTouches[0].pageY;
+			var pointDis = nowPoint - startPoint;
+			console.log(pointDis + startEl);
+		});
+	})();
 
+	// 获取或者设置元素的样式
+	function css(el, attr) {
+		var val = getComputedStyle(el)[attr];
+		val = parseFloat(val);
+		return val;
+	}
+</script>
+</body>
 </html>

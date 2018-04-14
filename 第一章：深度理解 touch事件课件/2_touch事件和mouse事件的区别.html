@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<meta name="viewport" content="width=device-width,user-scalable=no"/>
 	<title>Document</title>
 	<style>
 		#box {
@@ -15,30 +14,29 @@
 </head>
 
 <body>
-	<div id="box"></div>
-	<script type="text/javascript">
-		(function () {
-			var box = document.querySelector('#box');
-			/*
-				touchstart 手指触碰 -- mousedown
-				touchmove 手指移动 -- mousemove(鼠标移出红色方块不在继续触发)
-				touchend 手指抬起 -- mouseup(鼠标移出红色方块不在继续触发，只会在红色方块内鼠标抬起时触发)
+<div id="box"></div>
+<script type="text/javascript">
+	(function () {
+		var box = document.querySelector('#box');
+		/*
+		 touchstart 手指触碰 -- mousedown
+		 touchmove 手指移动 -- mousemove(鼠标移出红色方块不在继续触发)
+		 touchend 手指抬起 -- mouseup(鼠标移出红色方块不在继续触发，只会在红色方块内鼠标抬起时触发)
 
-				touchstart 手指触碰元素
-				touchmove 手指触碰元素之后，在屏幕中进行移动(手指移出红色方块也会继续触发)
-				touchend 手指触碰元素之后，在屏幕中抬起(手指移出红色方块也会继续触发)
-			*/
-			box.addEventListener('mousedown', function (e) {
-				console.log('mousedown');
-			});
-			box.addEventListener('mousemove', function (e) {
-				console.log('mousemove');
-			});
-			box.addEventListener('mouseup', function (e) {
-				console.log('mouseup');
-			});
-		})();
-	</script>
+		 touchstart 手指触碰元素
+		 touchmove 手指触碰元素之后，在屏幕中进行移动(手指移出红色方块也会继续触发)
+		 touchend 手指触碰元素之后，在屏幕中抬起(手指移出红色方块也会继续触发)
+		 */
+		box.addEventListener('mousedown', function (e) {
+			console.log('mousedown');
+		});
+		box.addEventListener('mousemove', function (e) {
+			console.log('mousemove');
+		});
+		box.addEventListener('mouseup', function (e) {
+			console.log('mouseup');
+		});
+	})();
+</script>
 </body>
-
 </html>

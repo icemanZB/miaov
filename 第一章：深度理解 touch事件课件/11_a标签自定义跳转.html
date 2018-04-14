@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,user-scalable=no" />
-<title>Document</title>
-<style type="text/css">
-	input {
-		width: 90%;
-		height: 50px;
-	}
-</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no"/>
+	<title>Document</title>
+	<style type="text/css">
+		input {
+			width: 90%;
+			height: 50px;
+		}
+	</style>
 </head>
 <body>
 <div class="page">
-<img src="img/img.jpg" />
-<input type="text" name="">
-<ul class="list">
-</ul>
-</div>	
+	<img src="img/img.jpg"/>
+	<input type="text" name="">
+	<ul class="list">
+	</ul>
+</div>
 <script type="text/javascript">
-var inner = "";
-var list = document.querySelector('.list');
-var input = document.querySelector('input');
-for(var i = 0; i < 50; i++){
-	// 阻止默认事件后，<a> 跳转也没用了
-	inner += '<li><a href="http://www.miaov.com">这是第'+i+"个li</li>";
-}	
-list.innerHTML = inner;
+	var inner = "";
+	var list = document.querySelector('.list');
+	var input = document.querySelector('input');
+	for (var i = 0; i < 50; i++) {
+		// 阻止默认事件后，<a> 跳转也没用了
+		inner += '<li><a href="http://www.miaov.com">这是第' + i + "个li</li>";
+	}
+	list.innerHTML = inner;
 
 
-var page = document.querySelector('.page');
-page.addEventListener('touchstart', function(e) {
-	e.preventDefault();
-});
-
-// 自定义点击跳转
-var a = list.querySelectorAll('a');
-for(var i = 0; i < a.length; i++){
-	a[i].addEventListener('touchend', function(e) {
-		// console.log(this.href);
-		window.location.href = this.href;
-		/* touchend 会导致误触。现象滑屏操作的时候，会误触 */
+	var page = document.querySelector('.page');
+	page.addEventListener('touchstart', function (e) {
+		e.preventDefault();
 	});
-}
+
+	// 自定义点击跳转
+	var a = list.querySelectorAll('a');
+	for (var i = 0; i < a.length; i++) {
+		a[i].addEventListener('touchend', function (e) {
+			// console.log(this.href);
+			window.location.href = this.href;
+			/* touchend 会导致误触。现象滑屏操作的时候，会误触 */
+		});
+	}
 </script>
 </body>
 </html>

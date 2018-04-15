@@ -1,40 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Document</title>
-<style type="text/css">
-#box {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100px;
-	height: 100px;
-	background: red;
-	transition: 1s;
-}	
-</style>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#box {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100px;
+			height: 100px;
+			background: red;
+			transition: 1s;
+		}
+	</style>
 </head>
 <body>
 <div id="box"></div>
 <script type="text/javascript">
-(function(){
-	var box = document.querySelector('#box');
-	box.onclick = function(){
-		if(box.offsetLeft == 0){
-			box.style.left = "300px";
-		} else {
-			//元素渲染的速度 要大于 代码执行速度
-			box.style.transition = "none";
-			box.style.left = "0";//30ms
-			setTimeout(function(){
-				box.style.transition = "1s";
-				box.style.left = "300px"; 
-			},50);
-			
-		}
-	};
-})();	
+	(function () {
+		var box = document.querySelector('#box');
+		box.onclick = function () {
+			if (box.offsetLeft == 0) {
+				box.style.left = "300px";
+			} else {
+				/*
+				 * 元素渲染的速度要小于代码执行速度
+				 * 这里先设置 left=0;还没有渲染到0，动画就立马加上了 transition='1s'；然后又立马 left='300px'
+				 * 所以整个过程看不到元素在动。
+				 *
+				 * 解决方案：加个延迟就可以了
+				 */
+				box.style.transition = "none"; // 瞬间跳回0，中间不要有动画
+				box.style.left = "0";
+				setTimeout(function () {
+					box.style.transition = "1s"; // 1秒的过渡动画
+					box.style.left = "300px";
+				}, 50);
+
+			}
+		};
+
+		// transition 动画延迟的问题
+		// 点击元素运动到300，然后在点击立即把元素设置到0的位置再移动到300
+		/*box.onclick = function () {
+			if (box.offsetLeft == 0) {
+				box.style.left = '300px';
+			} else {
+				box.style.left = 0;
+				box.style.left = '300px;
+			}
+		}*/
+	})();
 </script>
 </body>
 </html>

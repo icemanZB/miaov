@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dom-操作</title>
+</head>
+<style>
+	body,ul,dl,dt,dd{
+		padding: 0;margin: 0;list-style: none;
+	}
+	#wrap{
+		width: 900px;
+		height: 400px;
+		background: linear-gradient(to right bottom,#21ffff,#ce6584);
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		box-sizing: border-box;
+		padding: 80px 0;
+	}
+	#content{
+		width: 700px;
+		height: 240px;
+		background: rgba(255,255,255,0.5);
+		margin: 0 auto;
+	}
+	#top-wrap{
+		height: 50px;
+		background: rgba(255,255,255,0.2);
+	}
+	.fl{
+		float: left;
+	}
+	.fr{
+		float: right;
+	}
+	.clearfix::after{
+		content: "";
+		display: block;
+		height: 0;
+		clear: both;
+	}
+	.top-l,.top-r{
+		float: left;
+		height: 100%;
+		font-size: 14px;
+	}
+	.top-l{
+		width: 100px;
+		line-height: 50px;
+		text-align: center;
+	}
+	.top-r{
+		width: calc(100% - 100px);
+		padding: 11px 0;
+		box-sizing: border-box;
+	}
+	.top-r li{
+		border: 2px solid #10aaff;
+		height: 24px;
+		line-height: 24px;
+		float: left;
+		padding: 0 5px;
+		margin-right: 5px;
+		display: none;
+	}
+	.details{
+		padding: 0 5px;
+		color: #10aaff;
+	}
+	.close{
+		padding: 0 5px;
+		color: #fff;
+		background: #10aaff;
+		cursor: pointer;
+	}
+	dl{
+		height: 40px;
+		line-height: 40px;
+		font-size: 14px;
+	}
+	dt{
+		padding-right:20px;
+		color: #848a8c;
+	}
+	dl dd{
+		float: left;
+		margin-right: 20px;
+		color: #181818;
+		cursor: pointer;
+	}
+	#inof-wrap{
+		padding: 15px 20px;
+		box-sizing: border-box;
+		background: rgba(255,255,255,0.6);
+	}
+	#inof-wrap dl:first-child{
+		border-bottom: 1px dashed #5acbd6;
+	}
+	#inof-wrap dl:nth-child(3){
+		border-bottom: 1px dashed #5acbd6;
+		border-top: 1px dashed #5acbd6;
+	}
+	.active{
+		color: #10aaff;
+	}
+</style>
+<body>
+<div id="wrap">
+	<div id="content">
+		<div id="top-wrap">
+			<div class="top-l">你的选择:</div>
+			<ul class="top-r">
+				<li><span class="details">苹果</span><span class="close">×</span></li>
+				<li><span class="details">3.0英寸以下</span><span class="close">×</span></li>
+				<li><span class="details">安卓(Android)</span><span class="close">×</span></li>
+				<li><span class="details">联通3G</span><span class="close">×</span></li>
+			</ul>
+		</div>
+		<div id="inof-wrap">
+			<dl>
+				<dt class="fl">品牌:</dt>
+				<dd>苹果</dd>
+				<dd>小米</dd>
+				<dd>锤子</dd>
+				<dd>魅族</dd>
+				<dd>华为</dd>
+				<dd>OPPO</dd>
+				<dd>vivo</dd>
+				<dd>乐视</dd>
+				<dd>360</dd>
+				<dd>中兴</dd>
+				<dd>索尼</dd>
+			</dl>
+			<dl>
+				<dt class="fl">尺寸:</dt>
+				<dd>3.0英寸以下</dd>
+				<dd>3.0-3.9英寸</dd>
+				<dd>4.0-4.5英寸</dd>
+				<dd>4.6-4.9英寸</dd>
+				<dd>5.0-5.5英寸</dd>
+				<dd>6.0英寸以上</dd>
+			</dl>
+			<dl>
+				<dt class="fl">系统:</dt>
+				<dd>安卓(Android)</dd>
+				<dd>苹果(IOS)</dd>
+				<dd>微软(WindowsPhone)</dd>
+				<dd>无</dd>
+				<dd>其他</dd>
+			</dl>
+			<dl>
+				<dt class="fl">网络:</dt>
+				<dd>联通3G</dd>
+				<dd>双卡单4G</dd>
+				<dd>双卡双4G</dd>
+				<dd>联通4G</dd>
+				<dd>电信4G</dd>
+				<dd>移动4G</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+</body>
+<script>
+	"use strict";
+	let aLi=document.querySelectorAll('.top-r li');
+	let aClose=document.querySelectorAll('.top-r .close');
+	let aDl=document.querySelectorAll('#inof-wrap dl');
+	let aDd=document.querySelectorAll('#inof-wrap dl dd');
+	for(let i=0;i<aDd.length;i++){
+		aDd[i].onclick=function(){
+			//父元素 dl的index索引值
+			let parent_index=this.parentNode.index;
+			//点击的dd里的内容
+			let dd_content=this.innerText;
+			//如果点击的dd没有active的类并且active类没有在当前dl里的dd的dom身上
+			if(this.getAttribute("class")!=="active" && !this.parentNode.querySelector('.active')){
+				//点击的dd就给加个active类
+				this.className="active";
+			}else{//如果已经存在类了，点击的dd添加上active类，当前dl里的dd已经存在的去掉active类
+				this.parentNode.querySelector('.active').className="";
+				this.className="active";
+			}
+			//对应索引值的li的内容和显示隐藏控制
+			aLi[parent_index].style.display="block";
+			aLi[parent_index].querySelector('.details').innerHTML=dd_content;
+		}
+	}
+	for(let i=0;i<aClose.length;i++){
+		//给关闭按钮和dl添加自定义索引值
+		aClose[i].index=i;
+		aDl[i].index=i;
+		// 关闭按钮注册点击事件
+		aClose[i].onclick=function(){
+			this.parentNode.querySelector('.details').innerHTML='';
+			this.parentNode.style.display='none';
+			aDl[this.index].querySelector('.active').className="";
+		}
+	}
+</script>
+</html>

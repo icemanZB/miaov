@@ -8,16 +8,16 @@
 			margin: 0;
 		}
 
-		#warp {
+		#Warp {
 			width: 700px;
 			height: 500px;
 			margin: 30px auto;
 			background: url(img/warp.png) no-repeat;
 			position: relative;
-			/*text-align: center;*/
+			text-align: center;
 		}
 
-		#files {
+		#Files {
 			position: absolute;
 			left: 148px;
 			width: 420px;
@@ -58,7 +58,7 @@
 			margin-right: 10px;
 		}
 
-		.fileActive {
+		.file-active {
 			border-color: #b5a3c2;
 			background: #6f5872;
 		}
@@ -78,7 +78,7 @@
 			display: none;
 		}
 
-		.fileActive .check {
+		.file-active .check {
 			display: block;
 		}
 
@@ -105,9 +105,10 @@
 	</style>
 </head>
 <body>
-<section id="warp">
-	<div id="files">
-		<!--<div class="file">
+<section id="Warp">
+	<div id="Files">
+		<!--
+		<div class="file">
 			<div class="ico"></div>
 			<input type="checkbox" class="check">
 			<span>新建文件夹</span>
@@ -124,7 +125,8 @@
 			<input type="checkbox" class="check">
 			<span>新建文件夹</span>
 			<input type="text" class="text" style="display: none;">
-		</div>-->
+		</div>
+		-->
 	</div>
 	<a href="javascript:;" class="add"></a>
 	<a href="javascript:;" class="del"></a>
@@ -132,12 +134,13 @@
 <script>
 	let add = document.getElementsByClassName("add");
 	let del = document.getElementsByClassName("del");
-	let files = document.getElementById("files");
+	let files = document.getElementById("Files");
 	let Aspan = document.getElementsByTagName("span");
-	let Icheck = document.getElementsByClassName("check");
+	let iCheck = document.getElementsByClassName("check");
 	let atext = document.getElementsByClassName("text");
 	let file = document.getElementsByClassName("file");
 
+	// 新建
 	add[0].onclick = function () {
 		if (file.length < 3) {
 			files.innerHTML += `<div class="file"><div class="ico"></div><input type="checkbox" class="check"><span>新建文件夹</span><input type="text" class="text" style="display: none;"></div>`;
@@ -147,32 +150,33 @@
 	files.onmouseenter = function () {
 		for (let i = 0; i < file.length; i++) {
 			file[i].onmouseenter = function () {
-				Icheck[i].style.display = `block`;
-				file[i].className = `file fileActive`;
+				iCheck[i].style.display = `block`;
+				file[i].className = `file file-active`;
 				Aspan[i].ondblclick = function () {
 					atext[i].style.display = `block`;
 				}
-			}
+			};
 			file[i].onmouseleave = function () {
 				atext[i].style.display = `none`;
 				if (atext[i].value) {
 					Aspan[i].innerText = atext[i].value;
 				}
-				if (Icheck[i].checked == false) {
-					Icheck[i].style.display = `none`;
+				if (iCheck[i].checked == false) {
+					iCheck[i].style.display = `none`;
 					file[i].className = `file`;
 				}
-			}
+			};
 		}
-	}
+	};
+	// 删除
 	del[0].onclick = function () {
-		for (let i = 0; i < Icheck.length; i++) {
-			if (Icheck[i].checked) {
-				Icheck[i].parentNode.remove();
+		for (let i = 0; i < iCheck.length; i++) {
+			if (iCheck[i].checked) {
+				iCheck[i].parentNode.remove();
 				i--;
 			}
 		}
-	}
+	};
 </script>
 </body>
 </html>

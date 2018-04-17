@@ -20,7 +20,6 @@
 			vertical-align: top;
 		}
 
-		/* .page 是全屏的 */
 		body,
 		html {
 			height: 100%;
@@ -117,8 +116,6 @@
 			inner += "<li>这是第" + i + "个li</li>"
 		}
 		list.innerHTML = inner;
-		// 给整个页面加滚动，会导致左右滑动上面的 banner，整个页面的纵向也滚动了
-		// 下面的 isFirst 这块就是处理这个问题的
 		swiper({
 			wrap: page,
 			dir : "y"
@@ -157,13 +154,13 @@
 				} else if (now == imgs.length - 1) {
 					now = imgs.length / 2 - 1;
 				}
-				var targetX = -now * imgW;
+				var targetX = -now * imgW
 				css(list, "translateX", targetX);
 			},
 			end  : function () {
 				var nowX = css(list, "translateX");//获取当前移动的距离
 				now = Math.round(Math.abs(nowX / imgW));//根据当前移动的距离 计算出 应该停在第几张
-				var targetX = -now * imgW; //根据当前要停在第几张，计算出  移动的距离
+				var targetX = -now * imgW //根据当前要停在第几张，计算出  移动的距离
 				//console.log(targetX);
 				list.style.transition = ".3s";
 				css(list, "translateX", targetX);
@@ -218,7 +215,7 @@
 		var startPonit = {};//手指的初始位置
 		var startEl = {};// 元素的初始位置
 		var dir = init.dir;
-		var isFirst = true; // 判断用户是否 是第一次执行 move;
+		var isFirst = true; //判断用户是否 是第一次执行move;
 		var isDir = { //判断用户在对哪个方向进行滑屏
 			x: false,
 			y: false
@@ -227,12 +224,12 @@
 			x: "translateX",
 			y: "translateY"
 		};
-		var lastPoint = {}; // 上一次的手指坐标，为了解决安卓下大面积触摸会引发 touchmove 的问题
+		var lastPoint = {}; //上一次的手指坐标
 
 		css(scroll, "translateX", 0);
 		css(scroll, "translateY", 0);
 		css(scroll, "translateZ", 0);
-		// 安卓下大面积触摸会引发 touchmove 的问题
+		//安卓下大面积触摸会引发touchmove的问题
 		wrap.addEventListener('touchstart', function (e) {
 			init.start && init.start.call(wrap, e);
 			var touch = e.changedTouches[0];
@@ -243,7 +240,7 @@
 			lastPoint = {
 				x: touch.pageX,
 				y: touch.pageY
-			};
+			}
 			startEl = {
 				x: css(scroll, "translateX"),
 				y: css(scroll, "translateY")
@@ -255,8 +252,8 @@
 				x: touch.pageX,
 				y: touch.pageY
 			};
-			// 上一次坐标 和 这次坐标完全一致，我就不做任何处理
-			if (lastPoint.x == nowPonit.x && lastPoint.y == nowPonit.y) {
+			if (lastPoint.x == nowPonit.x
+				&& lastPoint.y == nowPonit.y) {//上一次坐标 和 这次坐标完全一致，我就不做任何处理
 				return;
 			}
 			/* 手指 当前值 和 初始值的一个差值 */
@@ -264,8 +261,6 @@
 				x: nowPonit.x - startPonit.x,
 				y: nowPonit.y - startPonit.y
 			};
-			console.log(isFirst);
-			// 避免执行x的时候同时执行了x，看测试拖动方向.png的滑动方式，就会出现这个问题
 			if (isFirst) {
 				if (Math.abs(dis.x) > Math.abs(dis.y)) {
 					//横向滑屏
@@ -277,26 +272,24 @@
 					isFirst = false;
 				}
 			}
-			console.log(isDir);
+			//console.log(isDir);
 			/* 元素应在要在的一个位置 */
 			var target = {
 				x: startEl.x + dis.x,
 				y: startEl.y + dis.y
 			};
-			/* 设置样式 */
-			if (isDir[dir]) { //用户如果滑屏方向和我们要求一致的时候
+			// /* 设置样式 */
+			if (isDir[dir]) {
+				//用户如果滑屏方向和我们要求一致的时候
 				css(scroll, dirTranslate[dir], target[dir]);
 				e.preventDefault();
 			}
-			// 最后一次记录的点等于当前的
 			lastPoint.x = nowPonit.x;
 			lastPoint.y = nowPonit.y;
 		});
 		wrap.addEventListener('touchend', function (e) {
 			init.end && init.end.call(wrap, e);
-			// 手指抬起的时候在可以触发 touchmove
 			isFirst = true;
-			// 恢复初始值
 			isDir = {
 				x: false,
 				y: false

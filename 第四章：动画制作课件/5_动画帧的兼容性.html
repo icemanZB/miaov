@@ -39,7 +39,7 @@
 				return id;
 			};
 		}
-		if (cancelAnimationFrame) {
+		if (!cancelAnimationFrame) {
 			window.cancelAnimationFrame = function (index) {
 				clearTimeout(index);
 			};

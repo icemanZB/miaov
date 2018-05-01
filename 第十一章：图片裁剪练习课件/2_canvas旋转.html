@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#c {
+			background: #ccc;
+		}
+	</style>
+</head>
+<body>
+<canvas id="c" width="800" height="600"></canvas>
+<script type="text/javascript">
+	var c = document.querySelector('#c');
+	var cxt = c.getContext("2d");
+	var img = new Image();
+	img.src = "img.jpg";
+	img.onload = function () {
+		cxt.drawImage(img, 0, 0, img.width, img.height);
+		c.onclick = function () {
+			// 加了 cxt.save();cxt.restore(); 永远是30°的旋转
+			// 否则就是在之前旋转的基础上在进行旋转
+			cxt.save();
+			cxt.clearRect(0, 0, c.width, c.height);
+			cxt.translate(img.width / 2, img.height / 2);
+			cxt.rotate(30 * Math.PI / 180);
+			cxt.translate(-img.width / 2, -img.height / 2);
+			cxt.drawImage(img, 0, 0, img.width, img.height);
+			cxt.restore();
+		};
+	};
+
+</script>
+</body>
+</html>
